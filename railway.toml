@@ -2,7 +2,8 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "cd florida/broward && python main.py --date $(python -c 'from datetime import datetime, timedelta; print((datetime.now() - timedelta(days=1)).strftime(\"%Y-%m-%d\"))') --upload-to-s3"
+startCommand = "echo 'Cron-only service, waiting for scheduled runs'"
 
-[cron]
+[[crons]]
 schedule = "0 6 * * *"
+command = "cd florida/broward && python main.py --date $(python -c 'from datetime import datetime, timedelta; print((datetime.now() - timedelta(days=1)).strftime(\"%Y-%m-%d\"))') --upload-to-s3"
