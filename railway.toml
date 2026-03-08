@@ -1,2 +1,2 @@
 [deploy]
-startCommand = "cd florida/broward && python main.py --date 2026-03-06 --upload-to-s3"
+startCommand = "cd florida/broward && python test_connection.py"
