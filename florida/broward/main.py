@@ -3,36 +3,27 @@
 Broward County Mortgage Data Scraper
 Main entry point for downloading and extracting ALL mortgage loan data
 """
-import sys
-print("RAILWAY DEBUG: Script starting...", file=sys.stdout, flush=True)
-
 import argparse
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Optional
-
-print("RAILWAY DEBUG: Basic imports done", file=sys.stdout, flush=True)
+import sys
 
 # Add parent directories to path to find lib package
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from dotenv import load_dotenv
 
-print("RAILWAY DEBUG: Loading .env", file=sys.stdout, flush=True)
 # Load environment variables from .env file
 load_dotenv()
 
-print("RAILWAY DEBUG: Importing lib modules", file=sys.stdout, flush=True)
 from lib.logging_config import setup_logging, get_logger
 from lib.s3_uploader import upload_to_s3
 from lib.notifications import NotificationManager, MetricsTracker, ScraperMetrics
 
-print("RAILWAY DEBUG: Importing local modules", file=sys.stdout, flush=True)
 from broward_ftp_client import BrowardFTPClient
 from parser import parse_broward_data
 from exporter import MortgageExporter
-
-print("RAILWAY DEBUG: All imports complete", file=sys.stdout, flush=True)
 
 # Setup logging will be called in main() after parsing arguments
 logger = None
@@ -394,7 +385,6 @@ def download_year_range(
 
 
 def main():
-    print("RAILWAY DEBUG: Entering main() function", file=sys.stdout, flush=True)
     parser = argparse.ArgumentParser(
         description='Broward County Mortgage Data Scraper',
         formatter_class=argparse.RawDescriptionHelpFormatter,
